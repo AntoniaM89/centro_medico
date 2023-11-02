@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" type="text/css" href="./cita-med.component.css">
+</head>
+
+<body>
+    <header class="header">
+        <ul class="menu">
+            <li><a routerLink="/cita">Reserva tu hora</a></li>
+            <li><a href="#about">Especialidades</a></li>
+            <a href="" class="logo">Galenos</a>
+            <input class="menu-btn" type="checkbox" id="menu-btn" />
+            <label class="menu-icon" for="menu-btn"><span class="navicon"></span></label>
+            <li><a routerLink="/informe">Contáctanos</a></li>
+            <li><a routerLink="/login">Iniciar sesión</a></li>
+        </ul>
+    </header>
+
+    <div class="comun">
+        <form class="form" id="Form1">
+            <h1>RESERVA HORA</h1>
+            <div class="step" id="step-1">
+                <h3>Paso 1: Identificar paciente</h3>
+                <label>Tipo de documento:</label>
+                <select id="card" name="usercard">
+                    <option value="rut">Carnet de identidad</option>
+                    <option value="pas">Pasaporte</option>
+                </select>
+                <label>Número de documento:</label>
+                <br>
+                <input type="text">
+                <button id="Next1">Siguiente</button>
+            </div>
+        </form>
+        <form class="form" id="Form2">
+            <div class="step" id="step-2">
+                <h3>Paso 2: Seleccionar Servicios</h3>
+                <label>Servicios disponibles</label>
+                <label>Elige el servicio que necesitas</label>
+                <section>
+                    <div class="four col">
+                        <input type="radio" name="r1" id="r1">
+                        <label for="r1">
+                            <img src="../../../assets/Salud.png">
+                            <span>Consultas</span>
+                        </label>
+                    </div>
+                    <div class="four col">
+                        <input type="radio" name="r1" id="r2">
+                        <label for="r2">
+                            <img src="../../../assets/Dental.png">
+                            <span>Dental</span>
+                        </label>
+                    </div>
+                    <div class="four col">
+                        <input type="radio" name="r1" id="r3">
+                        <label for="r3">
+                            <img src="../../../assets/Kine.png">
+                            <span>Kinesiología</span>
+                        </label>
+                    </div>
+                    <div class="four col">
+                        <input type="radio" name="r1" id="r4">
+                        <label for="r4">
+                            <img src="../../../assets/Laboratorio.png">
+                            <span>Laboratorio</span>
+                        </label>
+                    </div>
+                </section>
+                <button id="Back1">Anterior</button>
+                <button id="Next2">Siguiente</button>
+            </div>
+        </form>
+        <form class="form" id="Form3">
+            <div class="step" id="step-3">
+                <h3>Paso 3: Reserva hora</h3>
+                <!-- Agrega aquí los campos necesarios para la reserva de hora -->
+                <button id="Back2">Anterior</button>
+                <button type="submit">Reservar</button>
+            </div>
+        </form>
+    </div>
+   
+</body>
+
+</html>

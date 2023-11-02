@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Calendario</title>
+    <style>
+        table {
+            border-collapse: collapse;
+        }
+        td {
+            border: 1px solid #ccc;
+            width: 40px;
+            height: 40px;
+            text-align: center;
+        }
+        .empty {
+            background-color: black;
+        }
+    </style>
+</head>
+<body>
+    <h2>Calendario del {{ año }} - {{ mes }}</h2>
+    <table>
+        <tr>
+            <th>Lunes</th>
+            <th>Martes</th>
+            <th>Miércoles</th>
+            <th>Jueves</th>
+            <th>Viernes</th>
+            <th>Sábado</th>
+            <th>Domingo</th>
+        </tr>
+        {% for semana in calendario %}
+            <tr>
+                {% for dia in semana %}
+                    <td {% if dia == 0 %}class="empty"{% endif %}>
+                        {% if dia != 0 %}
+                            {{ dia }}
+                        {% endif %}
+                    </td>
+                {% endfor %}
+            </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
