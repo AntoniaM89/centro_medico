@@ -7,5 +7,5 @@ import { RouterModule } from '@angular/router';
   styleUrls: ['./inicio.component.css']
 })
 export class InicioComponent {
-
+  
 }

@@ -1,0 +1,25 @@
+table {
+    border-collapse: collapse;
+}
+td {
+    border: 1px solid #ccc;
+    width: 40px;
+    height: 40px;
+    text-align: center;
+}
+.empty {
+    background-color: black;
+}
+#miFormulario {
+    display: none;
+}
+.week {
+    display: flex;
+    list-style-type: none;
+    padding: 0;
+}
+
+.day {
+    flex: 1;
+    text-align: center;
+}

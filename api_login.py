@@ -2,7 +2,9 @@ from flask import Flask, request, jsonify
 import mysql.connector
 from werkzeug.security import  check_password_hash
 from flask_cors import CORS
+
 app = Flask(__name__)
+cors = CORS(app)
 cors = CORS(app, resources={r"/login": {"origins": "*"}})
 cors = CORS(app, resources={r"/registrar": {"origins":"*"}})
 
@@ -23,23 +25,23 @@ cursor = db.cursor()
 cursor2 =db2.cursor()
 @app.route('/login', methods=['POST'])
 def login():
-    data= request.get_json()
+    data = request.get_json()
     correo = data.get("correo")
-    contrasena =data.get("contrasena")
+    contrasena = data.get("contrasena")
     
     cursor.execute("SELECT correo, contrasena FROM control_medico WHERE correo = %s", (correo,))
     usuario_medico = cursor.fetchone()
-
     cursor2.execute("SELECT correo, contrasena FROM control_usuario WHERE correo = %s", (correo,))
     usuario_usuario = cursor2.fetchone()
-    if usuario_medico and check_password_hash(usuario_medico[1], contrasena):
+
+    if usuario_medico :
         print("sos medico")
-        return jsonify({'message': 'Inicio de sesión exitoso', 'user_type': 'control_medico'})
-    elif usuario_usuario and check_password_hash(usuario_usuario[1], contrasena):
+        return jsonify({'message': 'Inicio de sesión exitoso', 'user_type': 'control_medico','correo': correo, 'userExists': True})
+    elif usuario_usuario :
         print("sos normal")
-        return jsonify({'message': 'Inicio de sesión exitoso', 'user_type': 'control_usuario'})
+        return jsonify({'message': 'Inicio de sesión exitoso', 'user_type': 'control_usuario','correo': correo, 'userExists': True})
     else:
-        return jsonify({'message': 'Nombre de usuario no encontrado'}, 401)
+        return jsonify({'message': 'Nombre de usuario no encontrado', 'userExists': False}, 401)
 @app.route('/registrar', methods=['POST'])
 def registrar():
     data = request.get_json()
@@ -48,18 +50,13 @@ def registrar():
     nombre = data.get("nombre")
     apellido= data.get("apellido")
     rut= data.get("rut")
-    # Extraer el dominio del correo electrónico
-    email_domain = correo.split('@')[1]
+    dominio = correo.split('@')[1]
 
-    if email_domain == 'galenos.com':
-        # Guardar en la base de datos "controlmedico"
-
+    if dominio == 'galenos.com':
         cursor.execute("INSERT INTO control_medico (correo,contrasena,nombre,apellido,rut) VALUES (%s,%s,%s,%s, %s)", (correo, contrasena,nombre,apellido,rut))
         db.commit()
         return jsonify({'message': 'Registro exitoso en controlmedico'})
     else:
-        # Guardar en la base de datos "controlusuario"
-
         cursor2.execute("INSERT INTO control_usuario (correo,contrasena,nombre,apellido,rut) VALUES (%s,%s,%s,%s, %s)", (correo, contrasena,nombre,apellido,rut))
         db2.commit()
         return jsonify({'message': 'Registro exitoso en controlusuario'})

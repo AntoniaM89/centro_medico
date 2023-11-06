@@ -3,43 +3,76 @@
 <head>
     <title>Calendario</title>
     <style>
-        table {
-            border-collapse: collapse;
-        }
-        td {
-            border: 1px solid #ccc;
-            width: 40px;
-            height: 40px;
-            text-align: center;
-        }
-        .empty {
-            background-color: black;
-        }
+
     </style>
 </head>
 <body>
-    <h2>Calendario del {{ año }} - {{ mes }}</h2>
+    <h2>Calendario del {{ anio }} - {{ mes }}</h2>
     <table>
         <tr>
-            <th>Lunes</th>
-            <th>Martes</th>
-            <th>Miércoles</th>
-            <th>Jueves</th>
-            <th>Viernes</th>
-            <th>Sábado</th>
-            <th>Domingo</th>
+            {% for semana in calendario %}
+        <h1>{{ semana }}</h1>
         </tr>
-        {% for semana in calendario %}
+        
             <tr>
                 {% for dia in semana %}
                     <td {% if dia == 0 %}class="empty"{% endif %}>
                         {% if dia != 0 %}
-                            {{ dia }}
+                            <button id="dia" onclick="mostrarFormulario()">{{ dia }}</button>
                         {% endif %}
                     </td>
                 {% endfor %}
             </tr>
         {% endfor %}
     </table>
+    <form id="miFormulario">
+        <label for="pregunta1">Pregunta 1:</label>
+        <input type="time" id="pregunta1" name="pregunta1" ><br>
+
+        <label for="time">Pregunta 2:</label>
+        <input type="time" id="pregunta2" name="pregunta2"><br>
+
+        <button type="button" onclick="repetirPreguntas()">Repetir Preguntas</button>
+    </form>
+
+    <script>
+        var repeticiones = 0;
+
+        function repetirPreguntas() {
+            if (repeticiones < 4) {
+                var pregunta1Element = document.getElementById("pregunta1");
+                var pregunta2Element = document.getElementById("pregunta2");
+
+                var nuevaPregunta1 = pregunta1Element.cloneNode(true);
+                var nuevaPregunta2 = pregunta2Element.cloneNode(true);
+
+                // Limpiar los valores de los nuevos campos
+                nuevaPregunta1.value = "";
+                nuevaPregunta2.value = "";
+
+                // Agregar los nuevos campos al formulario
+                var formulario = document.getElementById("miFormulario");
+                formulario.appendChild(nuevaPregunta1);
+                formulario.appendChild(nuevaPregunta2);
+
+                repeticiones++;
+            } else {
+                alert("¡Límite de 4 repeticiones alcanzado!");
+            }
+        }
+        function limitarHoraFin() {
+            // Obtener la hora seleccionada en el campo hora_inicio
+            var horaInicioElement = document.getElementById("pregunta1");
+            var horaInicioValue = horaInicioElement.value;
+
+            // Establecer el atributo min en el campo hora_fin para limitar las opciones
+            var horaFinElement = document.getElementById("pregunta2");
+            horaFinElement.setAttribute("min", horaInicioValue);
+        }
+        function mostrarFormulario() {
+            var formulario = document.getElementById("miFormulario");
+            formulario.style.display = "block";
+        }
+    </script>
 </body>
 </html>

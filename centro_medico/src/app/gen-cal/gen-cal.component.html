@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body>
+    <h2>Calendario del {{ anio }} - {{ mes }}</h2>
+    <table> 
+        
+            <th>Lunes</th>
+            <th>Martes</th>
+            <th>Miércoles</th>
+            <th>Jueves</th>
+            <th>Viernes</th>
+            <th>Sábado</th>      
+            <th>Domingo</th>
+            <ng-container *ngFor="let mes of calendario"> 
+        <tr *ngFor="let semana of mes">
+           <td *ngFor="let dia of semana" [class.empty]="dia == '0'">
+                <button (click)="abrirFormulario(dia)"[attr.data-id]="dia">{{ dia }}</button>
+            </td>  
+        </tr>
+        </ng-container>
+    </table>
+    <form class="form"id="form1" *ngIf="mostrar_formulario">
+        <label for="time">Hora Entrada:</label>
+        <input type="time" id="hora_inicio" name="hora_inicio"[(ngModel)]="hora_inicio" ><br>
+
+        <label for="time">Hora salida:</label>
+        <input type="time" id="hora_final" name="hora_final" [(ngModel)]="hora_final"><br>
+
+        <button type="button" id="guardar" (click)="crear_hora()">guardar</button>
+    </form>
+</body>
+</html>

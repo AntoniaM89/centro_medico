@@ -30,7 +30,7 @@
                 </select>
                 <label>Número de documento:</label>
                 <br>
-                <input type="text">
+                <input type="text" >
                 <button id="Next1">Siguiente</button>
             </div>
         </form>
@@ -76,13 +76,21 @@
         <form class="form" id="Form3">
             <div class="step" id="step-3">
                 <h3>Paso 3: Reserva hora</h3>
-                <!-- Agrega aquí los campos necesarios para la reserva de hora -->
+                <div *ngFor="let item of hora">
+                    <div class="card">
+                    <div class="card-header">{{ item.nombre }}</div>
+                    <div class="card-body">
+                        <p>Hora de inicio: {{ item.hora_inicio }}</p>
+                        <p>Hora final: {{ item.hora_final }}</p>
+                        <button (click)="agendar(item.rut)">Reservar</button>
+                    </div>
+                    </div>
+                  </div>
                 <button id="Back2">Anterior</button>
-                <button type="submit">Reservar</button>
+                
             </div>
         </form>
     </div>
-   
 </body>
 
 </html>

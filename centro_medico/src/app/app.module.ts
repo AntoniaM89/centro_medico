@@ -13,6 +13,8 @@ import { LoginComponent } from './login/login/login.component';
 import { SingUpComponent } from './sing_up/sing-up/sing-up.component';
 import { InformesComponent } from './informes/informes/informes.component';
 import { CitaMedComponent } from './Cita_Med/cita-med/cita-med.component';
+import { GenConsComponent } from './gen-cons/gen-cons.component';
+import { GenCalComponent } from './gen-cal/gen-cal.component';
 
 
 @NgModule({
@@ -22,7 +24,9 @@ import { CitaMedComponent } from './Cita_Med/cita-med/cita-med.component';
     LoginComponent,
     SingUpComponent,
     InformesComponent,
-    CitaMedComponent
+    CitaMedComponent,
+    GenConsComponent,
+    GenCalComponent
   ],
   imports: [
     BrowserModule,
