@@ -27,13 +27,10 @@ cursor2 =db2.cursor()
 def login():
     data = request.get_json()
     correo = data.get("correo")
-    contrasena = data.get("contrasena")
-    
     cursor.execute("SELECT correo, contrasena FROM control_medico WHERE correo = %s", (correo,))
     usuario_medico = cursor.fetchone()
     cursor2.execute("SELECT correo, contrasena FROM control_usuario WHERE correo = %s", (correo,))
     usuario_usuario = cursor2.fetchone()
-
     if usuario_medico :
         print("sos medico")
         return jsonify({'message': 'Inicio de sesión exitoso', 'user_type': 'control_medico','correo': correo, 'userExists': True})
@@ -51,7 +48,6 @@ def registrar():
     apellido= data.get("apellido")
     rut= data.get("rut")
     dominio = correo.split('@')[1]
-
     if dominio == 'galenos.com':
         cursor.execute("INSERT INTO control_medico (correo,contrasena,nombre,apellido,rut) VALUES (%s,%s,%s,%s, %s)", (correo, contrasena,nombre,apellido,rut))
         db.commit()

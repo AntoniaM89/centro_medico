@@ -21,9 +21,14 @@ export class LoginComponent {
       (response: any) => {
         if (response.userExists) {
           localStorage.setItem('correo', this.correo);
-          console.log(response);
-          console.log('Login successful');
-          this.route.navigate(['/inicio']);
+            if (this.correo.includes('@galenos.com')) {
+              console.log(response);
+              console.log('Login successful');
+              this.route.navigate(['/gen_calendario']);
+            }
+            else{
+              this.route.navigate(['/inicio']);
+            }
         } else {
           console.log('User does not exist');
         }

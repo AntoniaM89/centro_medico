@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-sing-up',
@@ -12,7 +13,7 @@ export class SingUpComponent {
   rut= '';
   apellido= '';
   contrasena= '';
-  constructor (private http: HttpClient){}
+  constructor (private http: HttpClient,private route: Router){}
   registrar() {
     const body = { correo: this.correo, contrasena: this.contrasena , nombre: this.nombre, apellido:this.apellido,rut:this.rut};
   
@@ -20,6 +21,7 @@ export class SingUpComponent {
       (response: any) => {
         console.log(response);
         console.log("te uniste de pana");
+        this.route.navigate(['']);
       },
       (error: any) => {
         console.error(error);

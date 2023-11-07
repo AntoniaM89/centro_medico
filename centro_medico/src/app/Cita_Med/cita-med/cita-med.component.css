@@ -1,9 +1,12 @@
-body {
-    margin: -1%;
-  font-family: Helvetica, sans-serif, ;
+html, body{
+  height: 100%;
+  margin: -1%;
+  padding: 0;
+  font-family: Helvetica, sans-serif;
   background-color: #f4f4f4;
-
 }
+
+
 
 a {
   color: #000;
@@ -18,7 +21,7 @@ a {
     background-color: #F1E3F3; 
     padding: 4%; 
     margin: -1%;
-    height: 6%;
+    height: 14%;
 }
 
 .header ul {
@@ -163,16 +166,16 @@ section {
 }
 
 .comun form {
-    top: 14%;
-    width: 280px;
     position:relative;
     display: flex;
     align-content: center;
+    top: -25%;
+    width: 318px;
+    height: 248px;
 
 }
 form{
     background: #ccc;
-    height: 400px;
     width: 300px;
     margin: 8% auto;
     padding: 12%;
@@ -202,9 +205,33 @@ form button{
     color: #030303;
     cursor: pointer;
 }
-
-
-
+.comun{
+  top: 10%;
+  height: 10%;
+}
+form.form div.step section{
+  background: #ccc;
+  width: 300px;
+  margin: 8% auto;
+  padding: 12%;
+  position: relative;
+}
+form#Form2 div.step {
+  display: block;
+  margin: -27%;
+}
+form#Form2 div.step section{
+  background: #ccc;
+  width: -23px;
+  margin: 8% auto;
+  padding: 0%;
+  position: relative;
+  margin: unset;
+}
+form#Form2{
+  width: 338px;
+  height:310px;
+}
 .step_row{
     width: 360px; 
     height: 40px;

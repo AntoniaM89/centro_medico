@@ -1,10 +1,11 @@
-
-body {
-    margin: 0%;
+html, body {
+  height: 100%;
+  margin: -8;
+  padding: 0;
   font-family: Helvetica, sans-serif, ;
   background-color: #f4f4f4;
-
 }
+
 
 a {
   color: #000;
@@ -17,7 +18,7 @@ a {
     justify-content: center; 
     align-items: flex-start;
     background-color: #F1E3F3; 
-    padding: 10px; 
+    padding: 30px; 
   
 }
 
@@ -55,8 +56,9 @@ a {
 /* menu */
 
 .header .menu {
+
     display: block;
-    margin: 0 auto ;
+    margin: -5 ;
     clear: both;
     max-height: 0;
     transition: max-height .2s ease-out;
@@ -67,7 +69,7 @@ a {
 .header .menu-icon {
   cursor: pointer;
   display: inline-block;
-  float: right;
+
   padding: 28px 20px;
   position: relative;
   user-select: none;
@@ -142,7 +144,7 @@ a {
   z-index: 1;
   background: #FFFFFF;
   max-width: 360px;
-  margin: 0 auto 100px;
+  margin: -21px auto 100px;
   padding: 45px;
   text-align: center;
   box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);

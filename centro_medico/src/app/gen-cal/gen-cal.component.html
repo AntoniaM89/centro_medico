@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html>
-<head>
-</head>
+    <header class="header">
+        <a href="" class="logo">Galenos</a>
+    </header>
 <body>
     <h2>Calendario del {{ anio }} - {{ mes }}</h2>
+    <div class="calendario">
     <table> 
         
             <th>Lunes</th>
@@ -16,11 +18,12 @@
             <ng-container *ngFor="let mes of calendario"> 
         <tr *ngFor="let semana of mes">
            <td *ngFor="let dia of semana" [class.empty]="dia == '0'">
-                <button (click)="abrirFormulario(dia)"[attr.data-id]="dia">{{ dia }}</button>
+                <button *ngIf="dia != 0" (click)="abrirFormulario(dia)"[attr.data-id]="dia">{{ dia }}</button>
             </td>  
         </tr>
         </ng-container>
     </table>
+    </div>
     <form class="form"id="form1" *ngIf="mostrar_formulario">
         <label for="time">Hora Entrada:</label>
         <input type="time" id="hora_inicio" name="hora_inicio"[(ngModel)]="hora_inicio" ><br>

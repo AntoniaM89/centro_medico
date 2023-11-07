@@ -68,7 +68,9 @@ export class CitaMedComponent {
   }
   
   async obtener_rut() {
-    const response: any = await this.http.get('http://127.0.0.1:5003/rut/' + this.correo).toPromise();
+    try {
+      const response: any = await this.http.get('http://127.0.0.1:5003/rut/' + this.correo)
+      .toPromise();
       if (response && response.rut) {
         this.rut_usuario = response.rut;
         console.log("Respuesta del servidor:", response.rut_usuario);
@@ -76,7 +78,10 @@ export class CitaMedComponent {
       } else {
         console.error("Respuesta del servidor no contiene el campo 'rut'.");
       }
-}
+    } catch (error) {
+      console.error("Error al realizar la solicitud HTTP:", error);
+    }
+  }
 
   agendar(rut_medico:string){
     const body = {

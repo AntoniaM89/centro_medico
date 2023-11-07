@@ -22,27 +22,28 @@ cursor=db.cursor()
 cursor2 = db2.cursor()
 @app.route('/actualizar_hora', methods=['POST'])
 def actualizar_hora():
-        data = request.get_json()
-        rut_cliente = data.get('rut_cliente')
-        rut_medico = data.get('rut_medico')
-        cursor.execute("UPDATE gen_calendario SET rut_cliente = %s WHERE rut_medico = %s", (rut_cliente, rut_medico))
-        db.commit()
+    data = request.get_json()
+    rut_cliente = data.get('rut_cliente')
+    rut_medico = data.get('rut_medico')
+    cursor.execute("UPDATE gen_calendario SET rut_cliente = %s WHERE rut_medico = %s", (rut_cliente, rut_medico))
+    db.commit()
+    cursor2.execute("SELECT correo FROM controlusuario.control_usuario WHERE rut = %s;", (rut_cliente,))
+    result = cursor2.fetchone()
+    if result:
+        destinatario = result[0]
+        remitente = "verseniared@gmail.com"
+        email = EmailMessage()
+        email["From"] = remitente
+        email["To"] = destinatario
+        email["Subject"] = "Cita Agregada"
+        email.set_content(f"¡Su cita ha sido agregada con éxito!")
+        smtp = smtplib.SMTP_SSL("smtp.gmail.com")
+        smtp.login(remitente, "kgqy oiqx krae uthc")
+        smtp.sendmail(remitente, destinatario, email.as_string())
+        smtp.quit()
         return jsonify({'message': 'Hora actualizada'})
 
 
-@app.route('/correo',methods=['GET'])
-def correo ():
-    remitente = "verseniared@gmail.com"
-    destinatario = request.form['destinatario']
-    email = EmailMessage()
-    email["From"] = remitente
-    email["To"] = destinatario
-    email["Subject"] = "Correo de prueba"
-    email.set_content(f"bienvenido, tiene una cita el dia :xx:xx")
-    smtp = smtplib.SMTP_SSL("smtp.gmail.com")
-    smtp.login(remitente, "kgqy oiqx krae uthc")
-    smtp.sendmail(remitente, destinatario, email.as_string())
-    smtp.quit()
 @app.route('/consulta', methods=['GET'])
 def consulta():
     consulta_sql = "SELECT con.nombre, con.rut , gen.hora_final ,gen.hora_inicio FROM controlmedico.gen_calendario gen join controlmedico.control_medico con on gen.rut_medico = con.rut;"
