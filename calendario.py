@@ -66,6 +66,16 @@ def obtener_rut_medico():
         return jsonify(data)
     else:
         return jsonify({'error': 'No se encontró ningún médico con el RUT proporcionado'}), 404
+@app.route('/modificar_consulta',methods=['POST'])        
+def modificar_consulta():
+    id_T = request.arg.get("id_T")
+    hora_inicio = request.arg.get("hora_inicio")
+    hora_final= request.arg.get("hora_final")
+    precio= request.arg.get("precio")
+    descuento= request.arg.get("descuento")
+    cursor.execute("update hora_t set hora_inicio = %s, hora_final=%s, precio=%s, costo=%s, descuento =%s where id_T = %s",(hora_inicio,hora_final,precio, descuento, id_T,))
+    resultado = cursor.fetchone()
+    return jsonify(resultado)
 
 if __name__ == '__main__':
     app.run(port='5002')

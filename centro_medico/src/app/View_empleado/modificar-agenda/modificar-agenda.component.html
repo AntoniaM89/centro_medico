@@ -33,6 +33,7 @@
                     <td>Especialidad:</td>
                     <td>Descuento</td>
                     <td>Fecha:</td>
+                    <td> botones</td>
                 </tr>
                 <tr *ngFor="let consulta of consultas"><td> {{ consulta['id_T'] }}</td>
                 <td> {{ consulta['hora_inicio'] }}</td>
@@ -40,6 +41,9 @@
                 <td> {{ consulta['costo'] }}</td>
                 <td> {{ consulta['descuento'] }}</td>
                 <td> {{ consulta['fecha'] }}</td>
+                <td><button>eliminar</button>
+                    <button>modificar</button>
+                </td>
                 </tr>
                
                 <hr>
