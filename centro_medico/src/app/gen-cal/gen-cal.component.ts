@@ -83,11 +83,9 @@ export class GenCalComponent implements OnInit {
 
 buscarMedicos() {
   this.medicos = [];
-  
   if (this.rut) {
-    const url = `http://127.0.0.1:5002/obtener_rut?rut=${this.rut}`;
+    const url = `http://127.0.0.1:5002//obtener_rut_medico?rut=${this.rut}`
     console.log(this.rut)
-
     this.http.get<any[]>(url).subscribe(
       (data) => {
         if (data.length > 0) {

@@ -46,7 +46,19 @@ def guardar_hora():
 @app.route('/obtener_rut', methods=['GET'])
 def obtener_rut():
     rut = request.args.get('rut') 
-    cursor2.execute("SELECT id_T, hora_inicio, hora_final, costo, descuento, dia||'/'||mes||'/'||anno fecha FROM hora_t where rut_medico = %s", (rut,))
+    cursor.execute("SELECT id_T, hora_inicio, hora_final, costo, descuento, dia||'/'||mes||'/'||anno fecha FROM hora_t where rut_medico = %s", (rut,))
+    resultado = cursor.fetchone()
+
+    if resultado:
+        data = [{'me.rut': resultado[0], 'me.nombre': resultado[1], 'me.apellido': resultado[2], 'tp.nombre': resultado[3], 'me.id_esp': resultado[4]}]
+        return jsonify(data)
+    else:
+        return jsonify({'error': 'No se encontró ningún médico con el RUT proporcionado'}), 404
+
+@app.route('/obtener_rut_medico', methods=['GET'])
+def obtener_rut_medico():
+    rut = request.args.get('rut') 
+    cursor2.execute("SELECT me.rut, me.nombre, me.apellido ,tp.nombre ,me.id_esp FROM medico me join tipo_especialidad tp on me.id_esp=tp.id_esp where rut = %s", (rut,))
     resultado = cursor2.fetchone()
 
     if resultado:
@@ -54,5 +66,6 @@ def obtener_rut():
         return jsonify(data)
     else:
         return jsonify({'error': 'No se encontró ningún médico con el RUT proporcionado'}), 404
+
 if __name__ == '__main__':
     app.run(port='5002')

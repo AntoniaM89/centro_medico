@@ -20,8 +20,8 @@ db2 = mysql.connector.connect(
 )
 cursor=db.cursor()
 cursor2 = db2.cursor()
-@app.route('/actualizar_hora', methods=['POST'])
-def actualizar_hora():
+@app.route('/enviar_correo', methods=['POST'])
+def enviar_correo():
     data = request.get_json()
     rut_cliente = data.get('rut_cliente')
     rut_medico = data.get('rut_medico')
