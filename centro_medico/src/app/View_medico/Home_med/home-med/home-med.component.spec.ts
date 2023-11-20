@@ -1,16 +1,16 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { GenConsComponent } from './gen-cons.component';
+import { HomeMedComponent } from './home-med.component';
 
-describe('GenConsComponent', () => {
-  let component: GenConsComponent;
-  let fixture: ComponentFixture<GenConsComponent>;
+describe('HomeMedComponent', () => {
+  let component: HomeMedComponent;
+  let fixture: ComponentFixture<HomeMedComponent>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [GenConsComponent]
+      declarations: [HomeMedComponent]
     });
-    fixture = TestBed.createComponent(GenConsComponent);
+    fixture = TestBed.createComponent(HomeMedComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

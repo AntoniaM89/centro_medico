@@ -10,13 +10,19 @@ CORS(app, resources={r"/obtener_rut": {"origins": "http://localhost:4200"}})
 db = mysql.connector.connect(
     host="localhost",
     user="root",
-    password="SofiA.8989!.",
-    database="controlmedico"
+    password="",
+    database="Agenda"
 )
 
 cursor = db.cursor()
-    
-cursor=db.cursor()
+db2 = mysql.connector.connect(
+    host="localhost",
+    user="root",
+    password="",
+    database="Empleado"
+)
+
+cursor2=db2.cursor()
 @app.route('/generar_calendario/<int:anio>/<int:mes>', methods=['GET'])
 def generar_calendario(anio, mes):
         cal = calendar.Calendar()
@@ -30,21 +36,23 @@ def guardar_hora():
     hora_inicio= data.get('hora_inicio')
     hora_final = data.get('hora_final')
     rut_cliente = data.get('rut_cliente')
+    cod_especialidad = data.get('cod_especialidad')
     dia =data.get('dia')
     mes =data.get('mes')
-    anio = data.get('anio') 
-    cursor.execute("INSERT INTO gen_calendario ( rut_medico, hora_inicio, hora_final, rut_cliente, dia, mes, anno) VALUES (%s,%s,%s,%s,%s,%s,%s)",(rut_medico, hora_inicio, hora_final, rut_cliente,dia,mes,anio))
+    anno = data.get('anno') 
+    cursor.execute("INSERT INTO hora_t ( hora_inicio, hora_final,costo,descuento,dia,mes,anno, rut_medico, rut_paciente, cod_especialidad ) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s )",(hora_inicio, hora_final,0,0,dia,mes,anno, rut_medico, rut_cliente, cod_especialidad))
     db.commit()
     return jsonify ({'message':'hora creada'})
-@app.route('/obtener_rut',methods=['GET'])
+@app.route('/obtener_rut', methods=['GET'])
 def obtener_rut():
-    correo = request.args.get('correo') 
-    cursor.execute("SELECT rut FROM control_medico WHERE correo = %s", (correo,))
-    resultado = cursor.fetchone()
+    rut = request.args.get('rut') 
+    cursor2.execute("SELECT id_T, hora_inicio, hora_final, costo, descuento, dia||'/'||mes||'/'||anno fecha FROM hora_t where rut_medico = %s", (rut,))
+    resultado = cursor2.fetchone()
+
     if resultado:
-        rut_medico = resultado[0]
-        return jsonify({"rut": rut_medico})
+        data = [{'me.rut': resultado[0], 'me.nombre': resultado[1], 'me.apellido': resultado[2], 'tp.nombre': resultado[3], 'me.id_esp': resultado[4]}]
+        return jsonify(data)
     else:
-        return jsonify({"error": "Médico no encontrado"})
+        return jsonify({'error': 'No se encontró ningún médico con el RUT proporcionado'}), 404
 if __name__ == '__main__':
     app.run(port='5002')

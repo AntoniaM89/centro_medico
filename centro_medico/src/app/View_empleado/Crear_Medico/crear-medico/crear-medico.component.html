@@ -1,0 +1,37 @@
+<html>
+<header class="header">
+
+    <ul class="menu">
+
+        <a href="" class="logo">Galenos</a>
+    <input class="menu-btn" type="checkbox" id="menu-btn" />
+
+    </ul>
+</header>
+<body>
+    <div class="login-page">
+        
+        <div class="form" >
+            <h1>Registrar</h1>
+        <form class="login-form" (ngSubmit)="registrar()">
+            <h3>Nombre</h3>
+            <input type="text" placeholder="Nombre" name="nombre" [(ngModel)]="nombre"/>
+            <h3>Apellido</h3>
+            <input type="text" placeholder="Apellido" name="apellido" [(ngModel)]="apellido"/>
+            <h3>Rut:</h3>
+            <input type="text" placeholder="Rut" name="rut" [(ngModel)]="rut"/>
+            <h3>correo:</h3>
+            <input type="text" placeholder="Correo" name="correo" [(ngModel)]="correo"/>
+            <h3>contraseña: </h3>
+            <input type="password" placeholder="Contraseña" name="contrasena"[(ngModel)]="contrasena"/>
+            <select [formControl]="especialidadControl" (change)="ver()">
+                <option *ngFor="let especialidad of especialidades" [value]="especialidad.id_esp">
+                  {{ especialidad.nombre }}
+                </option>
+              </select>
+            <button>Crear</button>
+        </form>
+        </div>
+    </div>
+</body>
+</html>

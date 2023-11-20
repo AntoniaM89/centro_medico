@@ -1,0 +1,170 @@
+create database Cliente;
+Use Cliente;
+create table cliente (
+	 rut varchar(15) primary key,
+	 nombre varchar(30),
+	 apellido varchar(30),
+	 correo varchar (40),
+	 contrasena varchar(30)
+     );
+create database Cliente;
+Use Cliente;
+create table Cliente (
+	 rut varchar(15) primary key,
+	 nombre varchar(30),
+	 apellido varchar(30),
+	 correo varchar (40),
+	 contrasena varchar(30)
+     );
+
+create database Empleado;
+use Empleado;
+create table tipo_especialidad(
+	id_esp int auto_increment primary key,
+	nombre varchar(14) not null
+    );
+create table Secretaria (
+	id_secretaria int auto_increment primary key,
+	 rut varchar(15) ,
+	 nombre varchar(30),
+	 apellido varchar(30),
+	 correo varchar (40),
+	 contrasena varchar(30),
+	 sueldo int(8)
+     );
+create table Medico (
+	 rut varchar(15) primary key,
+	 nombre varchar(30),
+	 apellido varchar(30),
+	 correo varchar (40),
+	 contrasena varchar(30),
+     sueldo int(8),
+     id_esp int
+    );
+
+create database Agenda;
+use Agenda;
+
+create table hora_T (
+	id_T int auto_increment primary key,
+    hora_inicio varchar(5),
+    hora_final varchar(5),
+    costo int,
+    descuento int,
+    dia varchar (11),
+    mes varchar (12),
+    anno int (4),
+    rut_medico varchar(15) ,
+    rut_paciente varchar(15) 
+    );
+
+create database Informe ;
+use Informe;
+create table comision(
+	id_comision int auto_increment primary key,
+    servicio varchar(30),
+    precio int(8),
+    descuento int(4),
+    dia varchar (11),
+    mes varchar (12),
+    anno int (4)
+    
+);
+create table recaudacion (
+	id_recaudacion int auto_increment primary key,
+    dia varchar (11),
+    mes varchar (12),
+    anno int (4),
+    Total int(10)
+);
+
+//20112023
+
+Drop database Empleado;
+Drop database Agenda;
+Drop database Informe;
+Drop database Cliente;
+create database Cliente;
+Use Cliente;
+create table cliente (
+	 rut varchar(15) primary key,
+	 nombre varchar(30),
+	 apellido varchar(30),
+	 correo varchar (40),
+	 contrasena varchar(30)
+     ); 
+create database Empleado;
+use Empleado;
+create table tipo_especialidad(
+	id_esp int auto_increment primary key,
+	nombre varchar(14) not null
+    );
+create table Secretaria (
+	id_secretaria int auto_increment primary key,
+	 rut varchar(15) ,
+	 nombre varchar(30),
+	 apellido varchar(30),
+	 correo varchar (40),
+	 contrasena varchar(30)
+     );
+create table Medico (
+	 rut varchar(15) primary key,
+	 nombre varchar(30),
+	 apellido varchar(30),
+	 correo varchar (40),
+	 contrasena varchar(30),
+     id_esp int
+    );
+
+create database Agenda;
+use Agenda;
+
+create table hora_T (
+	id_T int auto_increment primary key,
+    hora_inicio varchar(5),
+    hora_final varchar(5),
+    costo int,
+    descuento int,
+    dia varchar (11),
+    mes varchar (12),
+    anno int (4),
+    rut_medico varchar(15) ,
+    rut_paciente varchar(15),
+    cod_especialidad int
+    );
+
+create database Informe ;
+use Informe;
+create table comision(
+	id_comision int auto_increment primary key,
+    servicio varchar(30),
+    precio int(8),
+    descuento int(4),
+    dia varchar (11),
+    mes varchar (12),
+    anno int (4)
+    
+);
+create table recaudacion (
+	id_recaudacion int auto_increment primary key,
+    dia varchar (11),
+    mes varchar (12),
+    anno int (4),
+    Total int(10)
+);
+use Empleado;
+alter table tipo_especialidad add (precio int(7));
+use Agenda;
+create table hora_Terminadas (
+	id_T int,
+    hora_inicio varchar(5),
+    hora_final varchar(5),
+    costo int,
+    descuento int,
+    dia varchar (11),
+    mes varchar (12),
+    anno int (4),
+    rut_medico varchar(15) ,
+    rut_paciente varchar(15),
+    cod_especialidad int
+);

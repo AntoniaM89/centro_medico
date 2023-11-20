@@ -4,6 +4,21 @@
         <a href="" class="logo">Galenos</a>
     </header>
 <body>
+    <div>
+        <label for="rutInput">Ingrese RUT:</label>
+        <input id="rutInput" [(ngModel)]="rut" placeholder="Ingrese RUT">
+        <button (click)="buscarMedicos()">Buscar Médicos</button>
+    </div>
+      <div *ngIf="medicos.length > 0">
+        <h2>Resultados:</h2>
+        <div *ngFor="let medico of medicos">
+            <p>RUT: {{ medico['me.rut'] }}</p>
+            <p>Nombre: {{ medico['me.nombre'] }}</p>
+            <p>Apellido: {{ medico['me.apellido'] }}</p>
+            <p>Especialidad: {{ medico['tp.nombre'] }}</p>
+            <hr>
+        </div>
+    </div>
     <h2>Calendario del {{ anio }} - {{ mes }}</h2>
     <div class="calendario">
     <table> 

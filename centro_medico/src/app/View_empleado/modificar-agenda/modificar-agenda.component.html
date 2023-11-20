@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Galenos</title>
+    </head>
+    <body>
+        <header class="header">
+            <a href="" class="logo">Galenos</a>
+        </header>
+        <div>
+            <label for="rutInput">Ingrese RUT:</label>
+            <input id="rutInput" [(ngModel)]="rut" placeholder="Ingrese RUT">
+            <button (click)="obtenerConsultas() ">Buscar Médicos</button>
+        </div>
+        <div *ngIf="medicos.length > 0">
+            <h2>Resultados Médicos:</h2>
+            <div *ngFor="let medico of medicos">
+                <p>RUT: {{ medico['me.rut'] }}</p>
+                <p>Nombre: {{ medico['me.nombre'] }}</p>
+                <p>Apellido: {{ medico['me.apellido'] }}</p>
+                <p>Especialidad: {{ medico['tp.nombre'] }}</p>
+                <hr>
+            </div>
+        </div>
+        <div *ngIf="consultas.length > 0">
+            <h2>Resultados Consultas:</h2>
+            <table>
+                <tr><td>Id Consulta:</td>
+                    <td>Hora Inicio:</td>
+                    <td>Hora Final:</td>
+                    <td>Especialidad:</td>
+                    <td>Descuento</td>
+                    <td>Fecha:</td>
+                </tr>
+                <tr *ngFor="let consulta of consultas"><td> {{ consulta['id_T'] }}</td>
+                <td> {{ consulta['hora_inicio'] }}</td>
+                <td>{{ consulta['hora_final'] }}</td>
+                <td> {{ consulta['costo'] }}</td>
+                <td> {{ consulta['descuento'] }}</td>
+                <td> {{ consulta['fecha'] }}</td>
+                </tr>
+               
+                <hr>
+            </table>
+        </div>
+    </body>
+</html>

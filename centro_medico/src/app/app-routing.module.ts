@@ -6,8 +6,13 @@ import { SingUpComponent } from './sing_up/sing-up/sing-up.component';
 import { InformesComponent } from './informes/informes/informes.component';
 import { CitaMedComponent } from './Cita_Med/cita-med/cita-med.component';
 import { GenCalComponent } from './gen-cal/gen-cal.component';
-import { GenConsComponent } from './gen-cons/gen-cons.component';
-
+import { HomeEmpComponent } from './View_empleado/Home_emp/home-emp/home-emp.component';
+import { HomeMedComponent } from './View_medico/Home_med/home-med/home-med.component';
+import { VerHorasComponent } from './View_medico/Ver_horas/ver-horas/ver-horas.component';
+import { CrearEspecialidadComponent } from './View_empleado/crear_Especialidad/crear-especialidad/crear-especialidad.component';
+import { CrearMedicoComponent } from './View_empleado/Crear_Medico/crear-medico/crear-medico.component';
+import { VerHoraComponent } from './View_empleado/ver-hora/ver-hora.component';
+import { ModificarAgendaComponent } from './View_empleado/modificar-agenda/modificar-agenda.component';
 @NgModule({
   imports: [RouterModule.forRoot([{ path: 'inicio', component: InicioComponent },
                                   {path:'',component: LoginComponent},
@@ -16,7 +21,14 @@ import { GenConsComponent } from './gen-cons/gen-cons.component';
                                   {path:'cita',component: CitaMedComponent},
                                   {path:'gen_cita',component: CitaMedComponent},
                                   {path:'gen_calendario',component: GenCalComponent},
-                                  {path:'gen_consulta',component: GenConsComponent},])],
+                                  {path:'Medico',component: HomeMedComponent},
+                                  {path:'Secretario',component: HomeEmpComponent},
+                                  {path:'Ver_horario',component: VerHorasComponent},
+                                  {path: 'crear_medico',component: CrearMedicoComponent},
+                                  {path:'crear_especialidad',component: CrearEspecialidadComponent},
+                                  {path:'ver_horas', component: VerHoraComponent},
+                                  {path:'modificar_horas', component: ModificarAgendaComponent},
+                                ])],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

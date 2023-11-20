@@ -1,10 +1,12 @@
-
-body {
-    margin: 0%;
+html, body {
+  height: 100%;
+  margin: -8;
+  padding: 0;
   font-family: Helvetica, sans-serif, ;
   background-color: #f4f4f4;
-
 }
+
+
 
 a {
   color: #000;
@@ -67,6 +69,7 @@ a {
 .header .menu-icon {
   cursor: pointer;
   display: inline-block;
+
   padding: 28px 20px;
   position: relative;
   user-select: none;
@@ -128,90 +131,43 @@ a {
   top: 0;
 }
 /* body */
+.contenedor {
+    display:flex ;
+    justify-content: center;
+    align-items: center;
 
-@import url(https://fonts.googleapis.com/css?family=Roboto:300);
+}
+img{
+    margin-top: 4%;
+    height: 20%;
+}
+.servicios{
+    padding: 4%;
+    background-color: #f4f4f4;
+}
+.servicios h2{
+    display: flex;
+    justify-content: center;
+    font-size: 2em;
+}
+section {
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: 20px;
+}
+section div img{
+    width: 100px; /* Establece el ancho del círculo */
+    height: 100px;
+    border-radius: 50%;
+    background-color: #D39CE4;
+}
+section div{
+    font-size: 13px;
+}
+#comun{
 
-.login-page {
-  width: 360px;
-  padding: 8% 0 0;
-  margin: auto;
-}
-.form {
-  border-radius: 12%;
-  position: relative;
-  z-index: 1;
-  background: #FFFFFF;
-  max-width: 360px;
-  margin: 0 auto 100px;
-  padding: 45px;
-  text-align: center;
-  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
-}
-.form input {
-  font-family: "Roboto", sans-serif;
-  outline: 0;
-  background: #f2f2f2;
-  width: 100%;
-  border: 0;
-  margin: 0 0 15px;
-  padding: 15px;
-  box-sizing: border-box;
-  font-size: 14px;
-}
-.form button {
-  font-family: "Roboto", sans-serif;
-  text-transform: uppercase;
-  outline: 0;
-  background: #8FB8ED;
-  width: 100%;
-  border: 0;
-  padding: 15px;
-  color: #FFFFFF;
-  font-size: 14px;
-  -webkit-transition: all 0.3 ease;
-  transition: all 0.3 ease;
-  cursor: pointer;
-}
-.form button:hover,.form button:active,.form button:focus {
-  background: #8FB8ED;
-}
-.form .message {
-  margin: 15px 0 0;
-  color: #b3b3b3;
-  font-size: 12px;
-}
-.form h3{
-  display: flex;
-  justify-content: left;
-}
+  padding: 4%;
 
-.form .register-form {
-  display: none;
-}
-.container {
-  position: relative;
-  z-index: 1;
-  max-width: 300px;
-  margin: 0 auto;
-}
-.container:before, .container:after {
-  content: "";
-  display: block;
-  clear: both;
-}
-.container .info {
-  margin: 50px auto;
-  text-align: center;
-}
-.container .info h1 {
-  margin: 0 0 15px;
-  padding: 0;
-  font-size: 36px;
-  font-weight: 300;
-  color: #1a1a1a;
-}
-body {
-height: 159%;
 }
 
 /* 48em = 768px */
@@ -232,3 +188,38 @@ height: 159%;
     display: none;
   }
 }
+
+.menu {
+  margin: 10px; /* Ajusta la cantidad de espacio alrededor del menú */
+  font-size: 20px;
+}
+
+.menu-dropdown {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+  margin-right: 80px; /* Ajusta el margen derecho para separar los elementos */
+}
+
+.submenu {
+  display: none;
+  font-size: 20px;
+  position: relative;
+  list-style-type: none;
+  padding: 30px; /* Ajusta el relleno del submenú según tus necesidades */
+  background-color: white; /* Puedes personalizar el color de fondo */
+  border: 1px solid #ccc; /* Puedes agregar un borde para mayor claridad */
+  width: 200px; /* Establece el ancho fijo del submenú */
+  height: 100px; /* Establece la altura fija del submenú */
+}
+
+.menu-dropdown:hover .submenu {
+  display: block;
+}
+
+.submenu li a {
+  padding: 3px;
+  color: black;
+  display: block;
+}
+

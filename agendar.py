@@ -9,14 +9,14 @@ CORS(app)
 db = mysql.connector.connect(
     host="localhost",
     user="root",
-    password="SofiA.8989!.",
-    database="controlmedico"
+    password="",
+    database="empleado"
 )
 db2 = mysql.connector.connect(
     host="localhost",
     user="root",
-    password="SofiA.8989!.",
-    database="controlusuario"
+    password="",
+    database="agenda"
 )
 cursor=db.cursor()
 cursor2 = db2.cursor()
@@ -43,25 +43,37 @@ def actualizar_hora():
         smtp.quit()
         return jsonify({'message': 'Hora actualizada'})
 
-
 @app.route('/consulta', methods=['GET'])
 def consulta():
-    consulta_sql = "SELECT con.nombre, con.rut , gen.hora_final ,gen.hora_inicio FROM controlmedico.gen_calendario gen join controlmedico.control_medico con on gen.rut_medico = con.rut;"
-    print("Consulta SQL:", consulta_sql)
-    cursor2.execute(consulta_sql)
+    rut = request.args.get('rut') 
+    cursor2.execute("SELECT id_T, hora_inicio, hora_final, costo, descuento, CONCAT(dia,'/',mes,'/',anno) as fecha FROM hora_t where rut_medico = %s", (rut,))
     resultados = cursor2.fetchall()
-    data = [{'nombre': nombre, 'rut': rut, 'hora_inicio': hora_inicio, 'hora_final': hora_final} for nombre, rut, hora_final, hora_inicio,  in resultados]
-    return jsonify(data)
-
-@app.route('/rut/<correo>', methods=['GET'])
-def rut(correo):
-    cursor2.execute("SELECT rut FROM controlusuario.control_usuario WHERE correo = %s;", (correo,))
-    resultado = cursor2.fetchone()
-    if resultado:
-        rut_usuario = resultado[0]
-        return jsonify({"rut": rut_usuario})
+    if resultados:
+        data = []
+        for resultado in resultados:
+            data.append({
+                'id_T': resultado[0],
+                'hora_inicio': resultado[1],
+                'hora_final': resultado[2],
+                'costo': resultado[3],
+                'descuento': resultado[4],
+                'fecha': resultado[5]
+            })
+        return jsonify(data)
     else:
-        return jsonify({"error": "usuario no encontrado"})
+        return jsonify({'error': 'No se encontró ninguna consulta para el médico con el RUT proporcionado'}), 404
+
+@app.route('/actualizar_hora', methods=['PUT'])
+def actualizar_hora():
+    data = request.get_json()
+    id_t = data.get('id_T')
+    hora_inicio = data.get('hora_inicio')
+    hora_final = data.get('hora_final')
+    costo = data.get('costo')
+    cursor2.execute("UPDATE hora_t SET hora_inicio = %s, hora_final = %s, costo = %s WHERE id_T = %s", (hora_inicio, hora_final, costo, id_t))
+    db2.commit()
+    return jsonify({'message': 'Hora actualizada correctamente'})
+
 
 if __name__ == '__main__':
     app.run(port=5003)

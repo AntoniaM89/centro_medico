@@ -9,16 +9,17 @@ import { ServicioService } from '../servicios/servicio.service';
 })
 export class GenCalComponent implements OnInit {
   dia_seleccionado: number | null = null;
-  correo!: string | null;
+  rut = "";
   hora_inicio = '';
   hora_final = '';
   rut_cliente = null;
   calendario: any;
-  rut_medico: string | null = null;
   anio: number;
   mes: number;
   dia: number | null = null;
   mostrar_formulario: Boolean = false;
+  medicos: any[] = [];
+  cod_esp = 0;
 
   constructor(private http: HttpClient, private servicio: ServicioService) {
     this.dia = 0;
@@ -28,13 +29,11 @@ export class GenCalComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.correo = this.servicio.getCorreo();
-    console.log("correo:", this.correo);
     const fechaActual = new Date();
     this.anio = fechaActual.getFullYear();
     this.mes = fechaActual.getMonth() + 1;
     this.obtenerCalendario();
-    this.obtenerRut();
+    
   }
   
   obtenerCalendario() {
@@ -50,17 +49,6 @@ export class GenCalComponent implements OnInit {
       }
     );
   }
-  obtenerRut(){
-    this.http.get('http://127.0.0.1:5002/obtener_rut?correo=' + this.correo).subscribe(
-      (response: any) => {
-        if (response.rut) {
-          this.rut_medico = response.rut; 
-        }
-      },
-      (error: any) => {
-        console.error(error);
-    })
-  }
   abrirFormulario(dia:number) {
       this.dia = dia;
       console.log(dia);
@@ -70,17 +58,18 @@ export class GenCalComponent implements OnInit {
     console.log(this.anio)
     if (this.dia) {
       const body = {
-        rut_medico: this.rut_medico,
+        rut_medico: this.rut,
         hora_inicio: this.hora_inicio,
         hora_final: this.hora_final,
         rut_cliente: null,
         dia: this.dia,
         mes: this.mes,
-        anio: this.anio}
+        anno: this.anio,
+        cod_especialidad: this.cod_esp
+      }
     this.http.post('http://127.0.0.1:5002/guardar_hora', body).subscribe(
       (response: any) => {
         console.log(response);
-        console.log("se guardo de pana");
         this.mostrar_formulario = false;
 
       },
@@ -88,7 +77,34 @@ export class GenCalComponent implements OnInit {
         console.error(error);
       }
     );
-    
+  }
+  
+}
+
+buscarMedicos() {
+  this.medicos = [];
+  
+  if (this.rut) {
+    const url = `http://127.0.0.1:5002/obtener_rut?rut=${this.rut}`;
+    console.log(this.rut)
+
+    this.http.get<any[]>(url).subscribe(
+      (data) => {
+        if (data.length > 0) {
+          this.medicos = data;
+          this.cod_esp = data[0]['me.id_esp'];
+          console.log(this.cod_esp)
+        } else {
+          console.log('No se encontraron médicos con el RUT proporcionado.');
+        }
+      },
+      (error) => {
+        console.error('Error al obtener médicos', error);
+        console.log('Error al obtener médicos. Por favor, inténtelo de nuevo.');
+      }
+    );
+  } else {
+    console.log('Ingrese un RUT válido.');
   }
 }
 }

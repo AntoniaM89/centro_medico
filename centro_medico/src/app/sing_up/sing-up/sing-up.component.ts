@@ -24,6 +24,7 @@ export class SingUpComponent {
         this.route.navigate(['']);
       },
       (error: any) => {
+        console.log("pinche vieja tonta");
         console.error(error);
       }
     );

@@ -23,8 +23,13 @@ export class LoginComponent {
           localStorage.setItem('correo', this.correo);
             if (this.correo.includes('@galenos.com')) {
               console.log(response);
-              console.log('Login successful');
-              this.route.navigate(['/gen_calendario']);
+              console.log('Login exitoso');
+              this.route.navigate(['/Secretario']);
+            }
+            else if (this.correo.includes('@galenosMED.com')) {
+              console.log(response);
+              console.log('Login exitoso');
+              this.route.navigate(['/Medico']);
             }
             else{
               this.route.navigate(['/inicio']);
