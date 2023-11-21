@@ -2,6 +2,7 @@ from flask import Flask, jsonify, request
 import mysql.connector
 import calendar
 from flask_cors import CORS
+from datetime import date
 app = Flask(__name__)
 CORS(app)
 
@@ -66,16 +67,30 @@ def obtener_rut_medico():
         return jsonify(data)
     else:
         return jsonify({'error': 'No se encontró ningún médico con el RUT proporcionado'}), 404
-@app.route('/modificar_consulta',methods=['POST'])        
-def modificar_consulta():
-    id_T = request.arg.get("id_T")
-    hora_inicio = request.arg.get("hora_inicio")
-    hora_final= request.arg.get("hora_final")
-    precio= request.arg.get("precio")
-    descuento= request.arg.get("descuento")
-    cursor.execute("update hora_t set hora_inicio = %s, hora_final=%s, precio=%s, costo=%s, descuento =%s where id_T = %s",(hora_inicio,hora_final,precio, descuento, id_T,))
-    resultado = cursor.fetchone()
-    return jsonify(resultado)
+    
+@app.route('/fecha_actual', methods=['GET'])
+def fecha_actual():
+    data = request.get_json()
+    dia = data.get('dia')
+    mes = data.get('mes')
+    anno = data.get('anno')
+    rut_medico = data.get('rut_medico')
+    cursor.execute("SELECT id_T, hora_inicio, hora_final, costo, CONCAT(dia,'/',mes,'/',anno) as fecha FROM hora_t WHERE dia = %s AND mes = %s AND anno = %s AND rut_medico = %s order by hora_inicio", (dia, mes, anno, rut_medico))
+    resultados = cursor.fetchall()
+    if resultados:
+        data = []
+        for resultado in resultados:
+            data.append({
+                'id_T': resultado[0],
+                'hora_inicio': resultado[1],
+                'hora_final': resultado[2],
+                'costo': resultado[3],
+                'fecha': resultado[4]
+            })
+        return jsonify(data)
+    else:
+        return jsonify({'message': 'No se encontraron resultados para la fecha actual'}), 404
+
 
 if __name__ == '__main__':
     app.run(port='5002')

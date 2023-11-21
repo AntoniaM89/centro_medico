@@ -10,9 +10,21 @@ export class ModificarAgendaComponent {
   rut = '';
   medicos: any[] = [];
   consultas: any[] = [];
-
+  id_t = 0;
+  selectedConsulta: any;
+  horainicio!: string;
+  horafinal!: string;
+  costo!: number;
+  descuento!: number;
   constructor(private http: HttpClient) {}
-
+  seleccionarConsulta(consulta: any) {
+    this.selectedConsulta = consulta;
+    this.horainicio = consulta.hora_inicio;
+    this.horafinal = consulta.hora_final;
+    this.costo = consulta.costo;
+    this.descuento = consulta.descuento;
+    console.log(this.selectedConsulta);
+  }
   buscarMedicos() {
     this.medicos = [];
     this.consultas = [];
@@ -31,8 +43,7 @@ export class ModificarAgendaComponent {
           }
         },
         (error) => {
-          console.error('Error al obtener médicos', error);
-          console.log('Error al obtener médicos. Por favor, inténtelo de nuevo.');
+          console.error( error);
         }
       );
     } else {
@@ -57,5 +68,21 @@ export class ModificarAgendaComponent {
         }
       );
     } 
+    modificarConsulta() {
+      const body = {
+          hora_inicio: this.horainicio,
+          hora_final: this.horafinal,
+          costo: this.costo,
+          id_T: this.selectedConsulta.id_T
+      };
+      this.http.post('http://127.0.0.1:5002/modificar_consulta', body).subscribe(
+          (response) => {
+              console.log(response);
+          },
+          (error) => {
+              console.error( error);
+          }
+      );
+  }
   
 }

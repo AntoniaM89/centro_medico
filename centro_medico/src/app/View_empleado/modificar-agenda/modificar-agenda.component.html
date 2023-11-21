@@ -14,24 +14,13 @@
             <input id="rutInput" [(ngModel)]="rut" placeholder="Ingrese RUT">
             <button (click)="obtenerConsultas() ">Buscar Médicos</button>
         </div>
-        <div *ngIf="medicos.length > 0">
-            <h2>Resultados Médicos:</h2>
-            <div *ngFor="let medico of medicos">
-                <p>RUT: {{ medico['me.rut'] }}</p>
-                <p>Nombre: {{ medico['me.nombre'] }}</p>
-                <p>Apellido: {{ medico['me.apellido'] }}</p>
-                <p>Especialidad: {{ medico['tp.nombre'] }}</p>
-                <hr>
-            </div>
-        </div>
         <div *ngIf="consultas.length > 0">
             <h2>Resultados Consultas:</h2>
             <table>
                 <tr><td>Id Consulta:</td>
                     <td>Hora Inicio:</td>
                     <td>Hora Final:</td>
-                    <td>Especialidad:</td>
-                    <td>Descuento</td>
+                    <td>costo:</td>
                     <td>Fecha:</td>
                     <td> botones</td>
                 </tr>
@@ -39,15 +28,23 @@
                 <td> {{ consulta['hora_inicio'] }}</td>
                 <td>{{ consulta['hora_final'] }}</td>
                 <td> {{ consulta['costo'] }}</td>
-                <td> {{ consulta['descuento'] }}</td>
                 <td> {{ consulta['fecha'] }}</td>
-                <td><button>eliminar</button>
+                <td> <button (click)="seleccionarConsulta(consulta)">modificar</button>
                     <button>modificar</button>
                 </td>
                 </tr>
-               
                 <hr>
             </table>
         </div>
+        <div *ngIf="selectedConsulta">
+            <h2>Modificar Consulta:</h2>
+            <label for="horaInicioInput">Hora Inicio:</label>
+            <input type="time" id="horaInicioInput" [(ngModel)]="horainicio" placeholder="Hora Inicio">
+            <label for="horaFinalInput">Hora Final:</label>
+            <input type="time" id="horaFinalInput" [(ngModel)]="horafinal" placeholder="Hora Final">
+            <label for="costoInput">Costo:</label>
+            <input id="costoInput" [(ngModel)]="costo" placeholder="Costo">
+            <button (click)="modificarConsulta()">Guardar Cambios</button>
+        </div>          
     </body>
 </html>

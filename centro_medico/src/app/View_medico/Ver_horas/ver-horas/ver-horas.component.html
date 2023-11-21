@@ -1,1 +1,14 @@
-<p>ver-horas works!</p>
+<div>
+    <label for="rutInput">Ingrese RUT:</label>
+    <input id="rutInput" [(ngModel)]="rut_medico" placeholder="Ingrese RUT">
+    <button (click)="obtenerConsultas() ">Buscar Médicos</button>
+</div>
+<div *ngIf="consultas.length > 0">
+    <h2>Resultados Consultas:</h2>
+    <div *ngFor="let consulta of consultas">
+    <div> {{ consulta['id_T'] }} </div>
+    <div> {{ consulta['hora_inicio'] }} </div>
+    <div> {{ consulta['costo'] }}</div>
+    <div> {{ consulta['fecha'] }}</div>
+    <button (click)="cambiar_estado(consulta)">Cambiar Estado</button>
+    </div>

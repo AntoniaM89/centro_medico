@@ -46,7 +46,7 @@ def enviar_correo():
 @app.route('/consulta', methods=['GET'])
 def consulta():
     rut = request.args.get('rut') 
-    cursor2.execute("SELECT id_T, hora_inicio, hora_final, costo, descuento, CONCAT(dia,'/',mes,'/',anno) as fecha FROM hora_t where rut_medico = %s", (rut,))
+    cursor2.execute("SELECT id_T, hora_inicio, hora_final, costo, CONCAT(dia,'/',mes,'/',anno) as fecha FROM hora_t where rut_medico = %s", (rut,))
     resultados = cursor2.fetchall()
     if resultados:
         data = []
@@ -56,8 +56,7 @@ def consulta():
                 'hora_inicio': resultado[1],
                 'hora_final': resultado[2],
                 'costo': resultado[3],
-                'descuento': resultado[4],
-                'fecha': resultado[5]
+                'fecha': resultado[4]
             })
         return jsonify(data)
     else:

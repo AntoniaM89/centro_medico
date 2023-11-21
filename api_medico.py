@@ -46,7 +46,7 @@ def consultar_pacientes():
         return jsonify({'message': 'Busqueda no encontrada', 'userExists': False}, 401)
 @app.route('/cambiar_estado', methods=['POST'])
 def cambiar_estado():
-    id_t= request.args.get('id_t')
+    id_t = request.json.get('id_t')
     cursor2.execute("INSERT INTO hora_Terminada ( id_T,hora_inicio, hora_final,costo,descuento,dia,mes,anno, rut_medico, rut_cliente, cod_especialidad ) VALUES select * from hora_t")
     db2.commit()
     cursor2.execute("Delete from hora_t where id_t = %s", (id_t))
