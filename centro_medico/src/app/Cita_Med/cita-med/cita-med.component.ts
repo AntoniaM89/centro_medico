@@ -7,7 +7,7 @@ import { ServicioService } from 'src/app/servicios/servicio.service';
   styleUrls: ['./cita-med.component.css']
 })
 export class CitaMedComponent {
-  rut_usuario: string | null = null;
+  rut_usuario!: string | null  ;
   correo!: string | null;
   correo2!: string | null;
   hora: any;
@@ -16,9 +16,9 @@ export class CitaMedComponent {
     this.consulta();
     this.correo2 = this.servicio.getCorreo();
     this.correo = this.servicio.getCorreo();
-    this.obtener_rut();
-    console.log("rut:", this.rut_usuario);
+    this. obtener_rut()
     console.log("correo:", this.correo);
+    console.log("rut:", this.rut_usuario);
     const Form1 = document.getElementById("Form1") as HTMLElement;
     const Form2 = document.getElementById("Form2") as HTMLElement;
     const Form3 = document.getElementById("Form3") as HTMLElement;
@@ -54,7 +54,7 @@ export class CitaMedComponent {
   }
   
   consulta(){
-    this.http.get('http://127.0.0.1:5003/consulta')
+    this.http.get('http://127.0.0.1:5003/consulta_agenda')
     .subscribe(
     (response: any) => {
       this.hora = response;
@@ -69,14 +69,14 @@ export class CitaMedComponent {
   
   async obtener_rut() {
     try {
-      const response: any = await this.http.get('http://127.0.0.1:5003/rut/' + this.correo)
+      const response: any = await this.http.get('http://127.0.0.1:5003/rut_cliente/' + this.correo)
       .toPromise();
       if (response && response.rut) {
         this.rut_usuario = response.rut;
+        
         console.log("Respuesta del servidor:", response.rut_usuario);
         console.log("rut:", this.rut_usuario);
-      } else {
-        console.error("Respuesta del servidor no contiene el campo 'rut'.");
+        this.agendar("");
       }
     } catch (error) {
       console.error("Error al realizar la solicitud HTTP:", error);

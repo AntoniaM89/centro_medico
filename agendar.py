@@ -61,15 +61,20 @@ def consulta():
         return jsonify(data)
     else:
         return jsonify({'error': 'No se encontró ninguna consulta para el médico con el RUT proporcionado'}), 404
-
-@app.route('/actualizar_hora', methods=['PUT'])
+@app.route('/consulta_agenda', methods=['GET'])
+def consulta_agenda():
+    cursor2.execute("SELECT  hora_final ,hora_inicio FROM hora_t;")
+    resultados = cursor2.fetchall()
+    data = [{ 'hora_final': hora_final,'hora_inicio': hora_inicio,} for  hora_final, hora_inicio,  in resultados]
+    return jsonify(data)
+@app.route('/actualizar_hora', methods=['POST'])
 def actualizar_hora():
     data = request.get_json()
     id_t = data.get('id_T')
     hora_inicio = data.get('hora_inicio')
     hora_final = data.get('hora_final')
     costo = data.get('costo')
-    cursor2.execute("UPDATE hora_t SET hora_inicio = %s, hora_final = %s, costo = %s WHERE id_T = %s", (hora_inicio, hora_final, costo, id_t))
+    cursor2.execute("UPDATE hora_t SET hora_inicio = %s, hora_final = %s, costo = %s WHERE id_T = %s", (hora_inicio, hora_final, costo, id_t,))
     db2.commit()
     return jsonify({'message': 'Hora actualizada correctamente'})
 

@@ -31,7 +31,7 @@ export class VerHoraComponent {
   obtenerConsultas() {    
     const body ={
       rut_medico : this.rut_medico,
-      dia : 20,
+      dia : this.dia,
       mes : this.mes,
       anno: this.anno,
     };

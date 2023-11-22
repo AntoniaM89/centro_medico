@@ -76,8 +76,8 @@ export class ModificarAgendaComponent {
           id_T: this.selectedConsulta.id_T
       };
       this.http.post('http://127.0.0.1:5003/actualizar_hora', body).subscribe(
-          (response) => {
-              console.log(response);
+        (response) => {
+            console.log(response);
           },
           (error) => {
               console.error( error);

@@ -82,6 +82,15 @@ def rut(correo):
         return jsonify({"rut": rut})
     else:
         return jsonify({"error": "usuario no encontrado"})
+@app.route('/rut_cliente/<correo>', methods=['GET'])
+def rut_cliente(correo):
+    cursor3.execute("SELECT rut FROM cliente WHERE correo = %s;", (correo,))
+    resultado = cursor3.fetchone()
+    if resultado:
+        rut = resultado[0]
+        return jsonify({"rut": rut})
+    else:
+        return jsonify({"error": "usuario no encontrado"})
 
 if __name__ == '__main__':
     app.run(port=5000)
