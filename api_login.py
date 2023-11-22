@@ -7,7 +7,7 @@ app = Flask(__name__)
 cors = CORS(app)
 cors = CORS(app, resources={r"/login": {"origins": "*"}})
 cors = CORS(app, resources={r"/registrar": {"origins":"*"}})
-
+cors = CORS(app, resources={r"/consulta_especialidad": {"origins":"*"}})
 db = mysql.connector.connect(
     host="localhost",
     user="root",

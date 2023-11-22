@@ -12,21 +12,26 @@ import { CrearEspecialidadComponent } from './View_empleado/crear_Especialidad/c
 import { CrearMedicoComponent } from './View_empleado/Crear_Medico/crear-medico/crear-medico.component';
 import { ModificarAgendaComponent } from './View_empleado/modificar-agenda/modificar-agenda.component';
 import { VerHorasComponent } from './View_medico/Ver_horas/ver-horas/ver-horas.component';
+import { VerHoraComponent } from './View_empleado/ver-hora/ver-hora.component';
 @NgModule({
-  imports: [RouterModule.forRoot([{ path: 'inicio', component: InicioComponent },
+  imports: [RouterModule.forRoot([ /*General */
                                   {path:'',component: LoginComponent},
                                   {path:'singup',component: SingUpComponent},
+                                  /*Secretario*/ 
                                   {path:'informe', component: InformesComponent},
-                                  {path:'cita',component: CitaMedComponent},
-                                  {path:'gen_cita',component: CitaMedComponent},
                                   {path:'gen_calendario',component: GenCalComponent},
-                                  {path:'Medico',component: HomeMedComponent},
                                   {path:'Secretario',component: HomeEmpComponent},
-                                  {path:'Ver_horario',component: VerHorasComponent},
+                                  {path:'horas_medico', component: VerHoraComponent},
                                   {path: 'crear_medico',component: CrearMedicoComponent},
                                   {path:'crear_especialidad',component: CrearEspecialidadComponent},
-                                  {path:'ver_horas', component: VerHorasComponent},
                                   {path:'modificar_horas', component: ModificarAgendaComponent},
+                                  /*Medico */
+                                  {path:'Medico',component: HomeMedComponent},
+                                  {path:'Ver_horario',component: VerHorasComponent},
+                                  /*Cliente */
+                                  { path: 'inicio', component: InicioComponent },
+                                  {path:'cita',component: CitaMedComponent},
+                                  {path:'gen_cita',component: CitaMedComponent},
                                 ])],
   exports: [RouterModule]
 })

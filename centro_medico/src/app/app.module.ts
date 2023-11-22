@@ -22,7 +22,7 @@ import { VerHorasComponent } from './View_medico/Ver_horas/ver-horas/ver-horas.c
 import { HomeMedComponent } from './View_medico/Home_med/home-med/home-med.component';
 import { CrearEspecialidadComponent } from './View_empleado/crear_Especialidad/crear-especialidad/crear-especialidad.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
+import { VerHoraComponent } from './View_empleado/ver-hora/ver-hora.component';
 import { ModificarAgendaComponent } from './View_empleado/modificar-agenda/modificar-agenda.component';
 
 
@@ -33,6 +33,7 @@ import { ModificarAgendaComponent } from './View_empleado/modificar-agenda/modif
     LoginComponent,
     SingUpComponent,
     InformesComponent,
+    VerHoraComponent,
     CitaMedComponent,
     GenCalComponent,
     HomeEmpComponent,

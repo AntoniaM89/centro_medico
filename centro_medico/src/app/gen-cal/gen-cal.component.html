@@ -1,8 +1,52 @@
+
 <!DOCTYPE html>
-<html>
-    <header class="header">
-        <a href="" class="logo">Galenos</a>
-    </header>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Galenos</title>
+</head>
+<body>
+
+<header class="header">
+  <ul class="menu">
+    <!--<li class="menu-dropdown">
+      <span>Formularios</span>
+      <ul class="submenu">
+        <li><a href="/informe">Comision</a></li>
+        <li><a href="/recaudacion">Recaudación</a></li>
+      </ul>
+    </li>-->
+
+    <li class="menu-dropdown">
+      <span>Especialidad</span>
+      <ul class="submenu">
+        <li><a href="/crear_especialidad">Crear</a></li>
+        <!--<li><a href="#">Eliminar</a></li>-->
+      </ul>
+    </li>
+
+    <a href="#" class="logo">Galenos</a>
+    <li class="menu-dropdown">
+      <span>Calendario</span>
+      <ul class="submenu">
+          <li><a routerLink="/gen_calendario">Generar</a></li>
+          <li><a routerLink="/modificar_horas">Modificar y eliminar</a></li>
+
+      </ul>
+      </li>
+    <li class="menu-dropdown">
+      <span>Medico</span>
+      <ul class="submenu">
+        <li><a routerLink="/crear_medico">Crear </a></li>
+        <!--<li><a href="#">Modificar datos </a></li>
+        <li><a href="#">Eliminar</a></li>-->
+        <li><a routerLink="/horas_medico"> ver horas</a></li>
+      </ul>
+    </li>
+  </ul>
+</header>
+
 <body>
     <div>
         <label for="rutInput">Ingrese RUT:</label>
@@ -49,4 +93,4 @@
         <button type="button" id="guardar" (click)="crear_hora()">guardar</button>
     </form>
 </body>
-</html>
+

@@ -20,9 +20,10 @@ export class CrearMedicoComponent implements OnInit {
   constructor(private http: HttpClient) { }
 
   ngOnInit(): void {
-    this.http.get<any[]>('http://127.0.0.1:5001/consulta_especialidad').subscribe((data) => {
+    this.http.get<any[]>('http://127.0.0.1:5001/consulta_especialidad').subscribe(
+    (data) => {
       this.especialidades = data;
-      console.log(data);
+      console.log(this.especialidades);
     });
 
     this.especialidadControl.valueChanges.subscribe((value) => {

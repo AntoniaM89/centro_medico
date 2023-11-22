@@ -20,11 +20,10 @@ export class SingUpComponent {
     this.http.post('http://127.0.0.1:5001/registrar', body).subscribe(
       (response: any) => {
         console.log(response);
-        console.log("te uniste de pana");
+        console.log("registro exitoso");
         this.route.navigate(['']);
       },
       (error: any) => {
-        console.log("pinche vieja tonta");
         console.error(error);
       }
     );

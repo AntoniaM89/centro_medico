@@ -25,17 +25,23 @@ export class LoginComponent {
               console.log(response);
               console.log('Login exitoso');
               this.route.navigate(['/Secretario']);
+              localStorage.setItem('correo', this.correo);
+              console.log(this.correo);
             }
             else if (this.correo.includes('@galenosMED.com')) {
               console.log(response);
               console.log('Login exitoso');
               this.route.navigate(['/Medico']);
+              localStorage.setItem('correo', this.correo);
+              console.log(this.correo);
             }
             else{
               this.route.navigate(['/inicio']);
+              localStorage.setItem('correo', this.correo);
+              console.log(this.correo);
             }
         } else {
-          console.log('User does not exist');
+          console.log('usuario no existe');
         }
       (error: any) => {
         console.error(error);

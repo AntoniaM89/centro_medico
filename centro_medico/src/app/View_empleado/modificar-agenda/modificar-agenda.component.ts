@@ -75,7 +75,7 @@ export class ModificarAgendaComponent {
           costo: this.costo,
           id_T: this.selectedConsulta.id_T
       };
-      this.http.post('http://127.0.0.1:5002/modificar_consulta', body).subscribe(
+      this.http.post('http://127.0.0.1:5003/actualizar_hora', body).subscribe(
           (response) => {
               console.log(response);
           },

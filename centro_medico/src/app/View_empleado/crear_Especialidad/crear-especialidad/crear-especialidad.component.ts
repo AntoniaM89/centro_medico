@@ -18,7 +18,7 @@ export class CrearEspecialidadComponent{
     this.http.post('http://127.0.0.1:5001/registrar_especialidad', body).subscribe(
       (response : any) => {
         console.log(response);
-        console.log("te uniste de pana");
+        console.log("registro exitoso de especialidad");
       },
       (error: any) => {
         console.error(error);

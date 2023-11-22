@@ -67,16 +67,18 @@ def obtener_rut_medico():
         return jsonify(data)
     else:
         return jsonify({'error': 'No se encontró ningún médico con el RUT proporcionado'}), 404
-    
-@app.route('/fecha_actual', methods=['GET'])
+
+@app.route('/fecha_actual', methods=['POST'])
 def fecha_actual():
     data = request.get_json()
     dia = data.get('dia')
     mes = data.get('mes')
     anno = data.get('anno')
     rut_medico = data.get('rut_medico')
-    cursor.execute("SELECT id_T, hora_inicio, hora_final, costo, CONCAT(dia,'/',mes,'/',anno) as fecha FROM hora_t WHERE dia = %s AND mes = %s AND anno = %s AND rut_medico = %s order by hora_inicio", (dia, mes, anno, rut_medico))
+
+    cursor.execute("SELECT id_T, hora_inicio, hora_final, costo, CONCAT(dia, '/', mes, '/', anno) as fecha FROM hora_t where rut_medico = %s and dia = %s and mes = %s and anno = %s ", (rut_medico, dia, mes, anno) )
     resultados = cursor.fetchall()
+
     if resultados:
         data = []
         for resultado in resultados:
@@ -90,7 +92,6 @@ def fecha_actual():
         return jsonify(data)
     else:
         return jsonify({'message': 'No se encontraron resultados para la fecha actual'}), 404
-
 
 if __name__ == '__main__':
     app.run(port='5002')
